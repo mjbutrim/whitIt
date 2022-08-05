@@ -2,10 +2,13 @@ Package: whitIt
 Type: Package
 Title: Get Whittaker Biomes Based on MAT and MAP
 Version: 1.0.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author: person("Matt", "Butrim", email = "mbutrim@uwyo.edu", role = "aut")
+Maintainer: <mbutrim@uwyo.edu>
 Description: Takes a data frame of sites with climatic data and obtains
     Whittaker Biomes for each site based on those climatic parameters.
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.1.2
+Imports: 
+    sp

@@ -5,7 +5,7 @@
 #' data frame, as long as it has an MAT (Mean annual temperature (c)) and
 #' MAP (Mean annual precipitation (mm)).  Code swiped from guillembagaria's
 #' ggbiome package which had a dependency on the obsolete RFc package that was
-#' primarily there to estimate MAT and MAP based on lat/long parameters.  
+#' primarily there to estimate MAT and MAP based on lat/long parameters.
 #'
 #' @return The original data frame with a new column of Whittaker Biome
 #'
@@ -14,7 +14,7 @@
 #'
 #' @param mat Column. The column in data containing mean annual
 #' temperature values in degrees Celsius.
-#' 
+#'
 #' @param map Column. The column in data containing mean annual
 #' precipitation values in millimeters.
 #'
@@ -23,7 +23,7 @@
 #' sites <- data.frame(site = c("A", "B"), MAT = c(9.3, 18.2),
 #'                     MAP = c(700, 1982))
 #' #Get biome
-#' whit_it(sites, mat = "MAT", map = "MAP")
+#' whit_it(sites, mat = sites$MAT, map = sites$MAP)
 #'
 #' @export
 
@@ -73,22 +73,22 @@ whit_it <- function(data, mat, map) {
                        sp::Polygon(cbind(df$map[df$biome == id_biome],
                                          df$mat[df$biome == id_biome])),
                      df=biomes_df, USE.NAMES = TRUE)
-  
+
   sp_biomes <- sp::SpatialPolygons(
     lapply(1:length(list_pol),
            function(i, x) {sp::Polygons(list(x[[i]]),
                                         names(x)[i])},
            x = list_pol)
   )
-  
+
   spdf_biomes <- sp::SpatialPolygonsDataFrame(
     sp_biomes, data.frame(biome = names(list_pol)), match.ID = 'biome'
   )
-  
+
   #Plot sites over the spdf_biomes object and obtain the whittaker biomes
   clim_point <- sp::SpatialPoints(data.frame(x = map, y = mat))
   biome <- sp::over(clim_point, spdf_biomes)[[1]]
-  data <- data %>% bind_cols(WhitBiome = biome)
+  data <- cbind(data, WhitBiome = biome)
   return(data)
- } 
+ }
   # END FUNCTION
