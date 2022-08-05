@@ -12,3 +12,5 @@ LazyData: true
 RoxygenNote: 7.1.2
 Imports: 
     sp
+URL: https://github.com/mjbutrim/whitIt
+BugReports: https://github.com/mjbutrim/whitIt/issues
